@@ -1,0 +1,17 @@
+{
+  "cloud": true,
+  "pages": [
+    "pages/index/index",
+    "pages/Illustrator/Illustrator",
+    "pages/event/event",
+    "pages/person/person",
+    "pages/randomWatch/randomWatch"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "fgo礼装图鉴",
+    "navigationBarTextStyle": "black"
+  }
+}

@@ -1,0 +1,58 @@
+/* pages/Illustrator/Illustrator.wxss */
+
+.search_items {
+  display: flex;
+}
+
+.search_box {
+  border: 1px solid #d0d0d0;
+  border-radius: 10rpx;
+  width: 70%;
+}
+
+.search_box_input {
+  margin-left: 60rpx;
+  height: 60rpx;
+  border-radius: 5px;
+}
+
+.show_box {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.show_box .detail_show_box {
+  width: 140rpx;
+  height: 140rpx;
+  background-color: aqua;
+  border: 1px solid #fff;
+}
+
+.searchcion {
+  margin: 10rpx 10rpx 10rpx 10rpx;
+  position: absolute;
+  left: 5rpx;
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}
+
+.view-scroll {
+  display: flex;
+  background-color: #fff;
+  
+   flex-wrap: wrap;
+}
+
+.filter-flex-item {
+  width: 160rpx;
+  height: 60rpx;
+  border-radius: 10rpx;
+  margin: 10rpx;
+  text-align: center;
+  background-color: beige;
+  border: solid 1px #d0d0d0;
+}

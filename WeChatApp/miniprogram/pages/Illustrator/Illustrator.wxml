@@ -1,0 +1,31 @@
+<view class="search_items">
+  <view class="search_box">
+    <icon class="searchcion" size='20' type='search'></icon>
+    <input class="search_box_input" placeholder="请输入作者名" value="" />
+  </view>
+  <text bindtap="setFilterPanel" data-findex="1" class="{{showfilterindex==1?'active':''}}">选择</text>
+</view>
+  <view class="filter-flex" wx:if="{{showfilter}}">
+    <scroll-view scroll-y="true" class="filter-content" style="height: {{pageHeight-40}}px;background: {{model==1?'#7B7B7B':'#FFFFFF'}}"> 
+    <view class="view-scroll">
+     <view class="filter-flex-item" wx:for="{{nameList}}" wx:key="{{index}}" >
+           <text  class="filter-flex-item-text">{{item}}</text>
+           </view>
+            </view> 
+       </scroll-view>
+      </view> 
+
+
+  <view wx:if="{{!showfilter}}">
+    <scroll-view scroll-y="true" style="height: {{pageHeight+'px'}};background: {{model==1?'#7B7B7B':'#FFFFFF'}}" >
+      <view class="view-scroll">
+        <block wx:for="{{showList}}" wx:key="id"> 
+                <view class="showList-item">
+                  <image class="view_grid_img pic_background" src="{{item.imgPath}}"></image>
+                </view>  
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+
+ 
