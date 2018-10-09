@@ -23,7 +23,9 @@ Page({
   getShowList:function(){
     var that = this;
     var imgInfo=[];
-    for (var i = that.imgCounts-1;i>=0;i--)
+    var counts  =  wx.getStorageInfoSync("imgListCounts")
+    console.log(counts);
+    for (var i = counts;i>=0;i--)
     {
       var Noi = ('00' + i).slice(-3);
       imgInfo.push({
@@ -32,7 +34,7 @@ Page({
       });
     }
     console.log(imgInfo);
-    that.setData(
+    this.setData(
       { 
         showList: imgInfo,
       }
@@ -45,11 +47,11 @@ Page({
    wx.cloud.callFunction({
      name: 'getNameList',
      data: {},
-     success: res => {  
+     success: res => {   
        that.setData({ 
-         nameList: res.result.data,
-         imgCounts:res.result.total
+         nameList: res.result.data, 
        })
+       wx.setStorageSync("imgListsCount", res.result.data)
      },
      fail: err => {
        console.error('[云函数] [rd47] 调用失败', err)
