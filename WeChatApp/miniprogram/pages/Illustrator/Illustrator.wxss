@@ -56,3 +56,8 @@
   background-color: beige;
   border: solid 1px #d0d0d0;
 }
+
+.showList-item image{
+	width: 100rpx;
+	height: 100rpx;
+}

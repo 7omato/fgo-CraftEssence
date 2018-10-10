@@ -20,9 +20,9 @@
     <scroll-view scroll-y="true" style="height: {{pageHeight+'px'}};background: {{model==1?'#7B7B7B':'#FFFFFF'}}" >
       <view class="view-scroll">
         <block wx:for="{{showList}}" wx:key="id"> 
-                <view class="showList-item">
-                  <image class="view_grid_img pic_background" src="{{item.imgPath}}"></image>
-                </view>  
+          <view class="showList-item">
+            <image  src="{{item.imgPath}}"></image>
+            </view>  
         </block>
       </view>
     </scroll-view>
