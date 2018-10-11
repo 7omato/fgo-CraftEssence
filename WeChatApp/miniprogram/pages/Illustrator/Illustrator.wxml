@@ -17,7 +17,7 @@
 
 
   <view wx:if="{{!showfilter}}">
-    <scroll-view scroll-y="true" style="height: {{pageHeight+'px'}};background: {{model==1?'#7B7B7B':'#FFFFFF'}}" >
+    <scroll-view scroll-y="true" style="height: {{(pageHeight+240)+'px'}};background: {{model==1?'#7B7B7B':'#FFFFFF'}}" bindscrolltolower="loadImgList" >
       <view class="view-scroll">
         <block wx:for="{{showList}}" wx:key="id"> 
           <view class="showList-item">

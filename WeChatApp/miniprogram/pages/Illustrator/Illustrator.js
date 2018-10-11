@@ -9,7 +9,7 @@ Page({
     nameList:[],
     pageHeight:400,
     showList:[], 
-    imgCounts:0,
+    imgCounts:0, 
   },
 
   /**
@@ -23,8 +23,7 @@ Page({
   getShowList:function(){
     var that = this;
     var imgInfo=[];
-    var counts = wx.getStorageSync("imgListsCount")
-    console.log(counts);
+    var counts = wx.getStorageSync("imgListsCount") 
     for (var i = counts;i>=0;i--)
     {
       var Noi = ('00' + i).slice(-3);
@@ -33,12 +32,11 @@ Page({
         'imgPath': 'cloud://tomato-cloud.746f-tomato-cloud/MINIICONS/礼装' + Noi+'.jpg', 
       });
     }
-    console.log(imgInfo);
-    that.setData(
-      { 
-        showList: imgInfo,
-      }
-    )
+    wx.setStorage({
+      key: 'CardList',
+      data: imgInfo,
+    })  
+    that.loadImgList(true); 
   },
  getIllusNameList:function()
  {
@@ -50,7 +48,7 @@ Page({
      success: res => { 
        console.log(res)  ;
        that.setData({ 
-         nameList: res.result.data, 
+         nameList: res.result.data, //nameLisT: 画师名 集合
        })
        wx.setStorage({
          key: 'imgListsCount',
@@ -87,6 +85,29 @@ Page({
       showfilterindex: null
     })
   },
+
+  loadImgList: function (flag) { 
+    var showList =  this.data.showList; 
+    var length = showList.length;
+    var globalList = wx.getStorageSync("CardList");
+    if (length >= globalList.length) {
+      wx.hideLoading();
+      return;
+    }
+    wx.showLoading({
+      title: '正在加载...',
+    }) 
+    for (var i = length; i < length + 40 && i < globalList.length; i++) {
+      showList.push(globalList[i]);
+    }
+    this.setData({
+      showList: showList
+    }, function () {
+      wx.hideLoading();
+    });
+  },
+
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -58,6 +58,6 @@
 }
 
 .showList-item image{
-	width: 100rpx;
-	height: 100rpx;
+	width: 186rpx;
+	height: 186rpx;
 }
