@@ -20,7 +20,7 @@
     <scroll-view scroll-y="true" style="height: {{(pageHeight+240)+'px'}};background: {{model==1?'#7B7B7B':'#FFFFFF'}}" bindscrolltolower="loadImgList" >
       <view class="view-scroll">
         <block wx:for="{{showList}}" wx:key="id"> 
-          <view class="showList-item">
+          <view class="showList-item"  data-index='{{item.id}}' catchtap='showCardDetail'>
             <image  src="{{item.imgPath}}"></image>
             </view>  
         </block>

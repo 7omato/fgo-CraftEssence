@@ -2,7 +2,7 @@ const app = getApp()
 const imgUrl = app.globalData.cloudImagesUrl
 
 Page({
-
+ 
   data: {
     imgUrls: [],
     indexmenu:[],
@@ -10,19 +10,20 @@ Page({
   },
 
   onLoad: function() {
-    this.indexImages();  
+    var imgShowQty=3;//一次选几个图
+    this.indexImages(imgShowQty);  
     this.indexIrons();
   },
 
   //获取x个随机数，拼凑swiper 的图片地址
-  indexImages: function() {
+  indexImages: function(many) {
     var that = this;
     var imgUrls = [];
     // 调用云函数
     wx.cloud.callFunction({
       name: 'rd47',
       data: {
-        qty: 3
+        qty: many
       },
       success: res => {
         var imgList = res.result.rdNum;
@@ -99,6 +100,13 @@ Page({
   onReachBottom: function() {
     //页面上拉触底事件的处理函数
     // console.log('onReachBottom');
-  }
-
+  },
+ onPullDownRefresh: function () {
+    wx.showNavigationBarLoading();
+    var imgShowQty = 3;//一次选几个图
+    var that = this; 
+    that.indexImages(imgShowQty); 
+    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh()
+  },
 })

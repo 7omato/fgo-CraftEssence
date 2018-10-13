@@ -5,13 +5,15 @@
     "pages/Illustrator/Illustrator",
     "pages/event/event",
     "pages/person/person",
-    "pages/randomWatch/randomWatch"
+    "pages/randomWatch/randomWatch", 
+    "pages/CraftEssence/CraftEssence"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "fgo礼装图鉴",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
   }
 }

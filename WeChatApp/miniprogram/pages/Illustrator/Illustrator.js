@@ -1,5 +1,6 @@
 // pages/Illustrator/Illustrator.js
-const db = wx.cloud.database()
+const app =getApp()
+const db = wx.cloud.database() 
 Page({
 
   /**
@@ -9,7 +10,7 @@ Page({
     nameList:[],
     pageHeight:400,
     showList:[], 
-    imgCounts:0, 
+    imgCounts:0,  
   },
 
   /**
@@ -17,26 +18,43 @@ Page({
    */
   onLoad: function (options) {
     this.getIllusNameList();
-    this.getShowList();
+    this.getShowList(); 
   },
 
   getShowList:function(){
     var that = this;
     var imgInfo=[];
-    var counts = wx.getStorageSync("imgListsCount") 
-    for (var i = counts;i>=0;i--)
+    var version_server= wx.getStorageSync("version_server") 
+    var version_local = wx.getStorageSync("version_local") 
+
+    console.log("version_local=" + wx.getStorageSync("version_local"))
+    console.log("version_server=" + wx.getStorageSync("version_server"))
+    if (version_local != version_server) { 
+      var counts = wx.getStorageSync("imgListsCount") 
+      wx.setStorage({
+        key: 'version_local',
+        data: version_server,
+      })  
+      console.log("version_local="+wx.getStorageSync("version_local"))
+      console.log("version_server=" + wx.getStorageSync("version_server"))
+      for (var i = counts; i >= 0; i--) {
+        var Noi = ('00' + i).slice(-3);
+        imgInfo.push({
+          'id': i,
+          'imgPath': app.globalData.cloudMiniImgUrl + '礼装' + Noi + '.jpg', 
+        });
+      }
+      wx.setStorage({
+        key: 'CardList',
+        data: imgInfo,
+      })   
+      that.loadImgList(true); 
+    } 
+    else
     {
-      var Noi = ('00' + i).slice(-3);
-      imgInfo.push({
-        'id': i,
-        'imgPath': 'cloud://tomato-cloud.746f-tomato-cloud/MINIICONS/礼装' + Noi+'.jpg', 
-      });
+      that.loadImgList(true); 
     }
-    wx.setStorage({
-      key: 'CardList',
-      data: imgInfo,
-    })  
-    that.loadImgList(true); 
+   
   },
  getIllusNameList:function()
  {
@@ -49,11 +67,16 @@ Page({
        console.log(res)  ;
        that.setData({ 
          nameList: res.result.data, //nameLisT: 画师名 集合
+         
        })
        wx.setStorage({
          key: 'imgListsCount',
          data: res.result.total,
-       }) 
+       })
+       wx.setStorage({
+         key: 'version_server',
+         data: res.result.ImgList_Version,
+       })
      },
      fail: err => {
        console.error('[云函数] [rd47] 调用失败', err)
@@ -107,7 +130,12 @@ Page({
     });
   },
 
-
+  showCardDetail: function (e) {
+    var id = e.currentTarget.dataset.index;
+    wx.navigateTo({
+      url: "../CraftEssence/CraftEssence?id=" + id
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

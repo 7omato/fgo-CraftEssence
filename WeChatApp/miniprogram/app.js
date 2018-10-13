@@ -9,9 +9,14 @@ App({
         traceUser: true,
       })
     }
-
+//全局变量
     this.globalData = {
-      cloudImagesUrl:'cloud://tomato-cloud.746f-tomato-cloud/image/'
+      //英灵正装地址
+      cloudImagesUrl:'cloud://tomato-cloud.746f-tomato-cloud/MINIICONS/FullPicture/',
+      //迷你图标地址
+      cloudMiniImgUrl:'cloud://tomato-cloud.746f-tomato-cloud/MINIICONS/',
+      //大图地址
+      cloudFullImgUrl: 'cloud://tomato-cloud.746f-tomato-cloud/MINIICONS/FullPicture/'
     }
     
   }
