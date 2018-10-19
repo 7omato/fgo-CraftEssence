@@ -1,4 +1,5 @@
-<!--miniprogram/pages/CraftEssence/CraftEssence.wxml--> 
-<view class="mainImg"  >
-  <image src='{{mainImg_Url}}' style='width:100%; height:100%;' class="mainImg" mode='aspectFit'/> 
+<scroll-view scroll-y="true" scroll-x="true" style="height:{{scrHeight}}px;width:{{scrWidth}}px">
+<view>
+<image class="mainImg" id = "mainImg" catchtouchend="endtap" catchtouchmove="movetap"  bindload="imgload" style="width:{{imgWidth}}px;height:{{imgHeight}}px" mode="aspectFit" src="{{mainImg_Url}}"></image>
 </view>
+</scroll-view>
