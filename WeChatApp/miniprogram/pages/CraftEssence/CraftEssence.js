@@ -11,6 +11,7 @@ var windowWidth = 0;  //咱们屏幕的宽
 var windowHeight = 0; //咱们屏幕的高 
 var lastXY_X=0;
 var lastXY_Y=0;
+var timeLast=0;   //长按持续时间/时间戳相减
 
 const app = getApp()
 Page({
@@ -64,22 +65,39 @@ Page({
     var e=event;
     console.log("endtap");
     console.log(e);
+    console.log(e.timeStamp);
+    timeLast=e.timeStamp-timeLast;
+    if(timeLast>2000)
+    {
+      console.log("长按");
+      wx.previewImage({
+  current: this.data.mainImg_Url, // 当前显示图片的http链接
+  urls: [this.data.mainImg_Url] // 需要预览的图片http链接列表
+})
+    }
     var nowXY_X = e.changedTouches[0].clientX;
     var nowXY_Y = e.changedTouches[0].clientY;
     var moveX  = nowXY_X-lastXY_X;
     var moveY =  nowXY_Y - lastXY_Y;
-    if (Math.abs(moveX) > Math.abs(moveY))
-    {
-          if(moveX<0)
-          {
-            console.log("左移");
-          }
-          else
-          {
-            console.log("右移");
-          }
+    if (Math.abs(moveX) > Math.abs(moveY)) {
+      if (moveX < 0) {
+        console.log("左移");
+        var idNum = parseInt(options.id) - 1;
+        if (idNum > 0) {
+          this.setData({
+            mainImg_Url: app.globalData.cloudFullImgUrl + idNum + "A.png",
+          })
+      }
+
+    } else {
+      console.log("右移");
+      var idNum = parseInt(options.id) + 1;
+      if (idNum<  parseInt(wx.getStorageSync("version_local")))
+    {  this.setData({
+            mainImg_Url: app.globalData.cloudFullImgUrl + idNum + "A.png",
+          })}
     }
-    else
+  } else
     {
       if (moveY> 0) {
         console.log("下移");
@@ -98,7 +116,9 @@ Page({
 
   //两手指进行拖动了
   movetap: function (event) {
+
     var e = event;
+    timeLast=e.timeStamp;
     if (e.touches.length == 2) {
       var xMove = e.touches[1].clientX - e.touches[0].clientX;
       var yMove = e.touches[1].clientY - e.touches[0].clientY;
@@ -137,6 +157,7 @@ Page({
     lastXY_X = e.touches[0].clientX;
     lastXY_Y = e.touches[0].clientY;
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
