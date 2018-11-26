@@ -9,6 +9,8 @@ var baseHeight;       //上一次触摸完之后的高
 var baseWidth;        //上一次触摸完之后的宽
 var windowWidth = 0;  //咱们屏幕的宽
 var windowHeight = 0; //咱们屏幕的高 
+var lastXY_X=0;
+var lastXY_Y=0;
 
 const app = getApp()
 Page({
@@ -59,7 +61,35 @@ Page({
  
   endtap: function (event)
   {
+    var e=event;
     console.log("endtap");
+    console.log(e);
+    var nowXY_X = e.changedTouches[0].clientX;
+    var nowXY_Y = e.changedTouches[0].clientY;
+    var moveX  = nowXY_X-lastXY_X;
+    var moveY =  nowXY_Y - lastXY_Y;
+    if (Math.abs(moveX) > Math.abs(moveY))
+    {
+          if(moveX<0)
+          {
+            console.log("左移");
+          }
+          else
+          {
+            console.log("右移");
+          }
+    }
+    else
+    {
+      if (moveY> 0) {
+        console.log("下移");
+      }
+      else {
+        console.log("上移");
+      }
+
+    }
+
     if (event.touches.length == 2) {
       olddistance = 0;
     } 
@@ -95,7 +125,18 @@ Page({
 
       }
     }
+    else if (e.touches.length ==1)
+    {
+     
+    
+    }
   }, 
+  
+  starttap:function(event){
+    var e = event;
+    lastXY_X = e.touches[0].clientX;
+    lastXY_Y = e.touches[0].clientY;
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

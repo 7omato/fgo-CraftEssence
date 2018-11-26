@@ -1,5 +1,5 @@
 <scroll-view scroll-y="true" scroll-x="true" style="height:{{scrHeight}}px;width:{{scrWidth}}px">
 <view>
-<image class="mainImg" id = "mainImg" catchtouchend="endtap" catchtouchmove="movetap"  bindload="imgload" style="width:{{imgWidth}}px;height:{{imgHeight}}px" mode="aspectFit" src="{{mainImg_Url}}"></image>
+<image class="mainImg" id = "mainImg" catchtouchend="endtap" catchtouchmove="movetap"  catchtouchstart='starttap' bindload="imgload" style="width:{{imgWidth}}px;height:{{imgHeight}}px" mode="aspectFit" src="{{mainImg_Url}}"></image>
 </view>
 </scroll-view>
